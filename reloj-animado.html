@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reloj Animado</title>
+  <style>
+    /* ---------- reset & base ---------- */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    /* ---------- floating background blobs ---------- */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .35;
+      animation: float 8s ease-in-out infinite alternate;
+    }
+    .blob--1 { width: 400px; height: 400px; background: #7f5af0; top: -10%; left: -5%;  animation-duration: 10s; }
+    .blob--2 { width: 300px; height: 300px; background: #2cb67d; bottom: -8%; right: -4%; animation-duration: 12s; animation-delay: 2s; }
+    .blob--3 { width: 250px; height: 250px; background: #e53170; top: 40%; left: 60%;    animation-duration: 9s;  animation-delay: 4s; }
+
+    @keyframes float {
+      to { transform: translate(40px, -30px) scale(1.15); }
+    }
+
+    /* ---------- clock card ---------- */
+    .clock-card {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, .06);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 24px;
+      padding: 48px 56px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .35);
+      animation: cardIn .8s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(30px) scale(.95); }
+      to   { opacity: 1; transform: translateY(0)   scale(1); }
+    }
+
+    .clock-card__label {
+      font-size: .85rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 12px;
+    }
+
+    /* ---------- time digits ---------- */
+    .time {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .time__digit {
+      display: inline-block;
+      font-size: 5rem;
+      font-weight: 700;
+      color: #fff;
+      min-width: 1.1ch;
+      text-align: center;
+      transition: transform .3s cubic-bezier(.34, 1.56, .64, 1),
+                  opacity  .3s ease;
+    }
+
+    /* animation class toggled by JS on change */
+    .time__digit--flip {
+      animation: digitFlip .45s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    @keyframes digitFlip {
+      0%   { transform: rotateX(90deg) scale(.7); opacity: 0; }
+      100% { transform: rotateX(0)     scale(1);  opacity: 1; }
+    }
+
+    .time__separator {
+      font-size: 5rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .4);
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* ---------- date ---------- */
+    .date {
+      margin-top: 18px;
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, .55);
+      letter-spacing: 1px;
+      animation: fadeUp 1s .4s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- seconds ring ---------- */
+    .seconds-ring {
+      margin: 24px auto 0;
+      width: 64px;
+      height: 64px;
+      position: relative;
+    }
+
+    .seconds-ring svg {
+      transform: rotate(-90deg);
+    }
+
+    .seconds-ring__track {
+      fill: none;
+      stroke: rgba(255, 255, 255, .08);
+      stroke-width: 4;
+    }
+
+    .seconds-ring__fill {
+      fill: none;
+      stroke: url(#grad);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-dasharray: 176; /* 2 * π * 28 ≈ 176 */
+      stroke-dashoffset: 176;
+      transition: stroke-dashoffset 1s linear;
+    }
+
+    .seconds-ring__text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .7);
+    }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 500px) {
+      .clock-card { padding: 32px 28px; border-radius: 18px; }
+      .time__digit, .time__separator { font-size: 3rem; }
+      .date { font-size: .95rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- background blobs -->
+  <div class="blob blob--1"></div>
+  <div class="blob blob--2"></div>
+  <div class="blob blob--3"></div>
+
+  <!-- clock card -->
+  <div class="clock-card">
+    <p class="clock-card__label">Hora actual</p>
+
+    <div class="time" id="time">
+      <!-- filled by JS -->
+    </div>
+
+    <p class="date" id="date"></p>
+
+    <!-- seconds progress ring -->
+    <div class="seconds-ring">
+      <svg viewBox="0 0 64 64" width="64" height="64">
+        <defs>
+          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#7f5af0" />
+            <stop offset="100%" stop-color="#2cb67d" />
+          </linearGradient>
+        </defs>
+        <circle class="seconds-ring__track" cx="32" cy="32" r="28" />
+        <circle class="seconds-ring__fill" id="secFill" cx="32" cy="32" r="28" />
+      </svg>
+      <span class="seconds-ring__text" id="secText"></span>
+    </div>
+  </div>
+
+  <script>
+    const timeEl   = document.getElementById('time');
+    const dateEl   = document.getElementById('date');
+    const secFill  = document.getElementById('secFill');
+    const secText  = document.getElementById('secText');
+    const CIRCUM   = 2 * Math.PI * 28;          // ≈ 175.93
+
+    let prevDigits = '';
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function renderTime() {
+      const now  = new Date();
+      const h    = pad(now.getHours());
+      const m    = pad(now.getMinutes());
+      const s    = now.getSeconds();
+      const digits = h + m;                     // e.g. "1435"
+
+      /* --- build / update digit spans --- */
+      if (timeEl.children.length === 0) {
+        // first render: create spans
+        timeEl.innerHTML =
+          `<span class="time__digit">${h[0]}</span>` +
+          `<span class="time__digit">${h[1]}</span>` +
+          `<span class="time__separator">:</span>` +
+          `<span class="time__digit">${m[0]}</span>` +
+          `<span class="time__digit">${m[1]}</span>`;
+      } else {
+        const spans = timeEl.querySelectorAll('.time__digit');
+        for (let i = 0; i < 4; i++) {
+          if (digits[i] !== prevDigits[i]) {
+            spans[i].textContent = digits[i];
+            // trigger flip animation
+            spans[i].classList.remove('time__digit--flip');
+            void spans[i].offsetWidth;           // force reflow
+            spans[i].classList.add('time__digit--flip');
+          }
+        }
+      }
+      prevDigits = digits;
+
+      /* --- date --- */
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      dateEl.textContent = now.toLocaleDateString('es-ES', options);
+
+      /* --- seconds ring --- */
+      const offset = CIRCUM - (CIRCUM * s) / 59;
+      secFill.style.strokeDashoffset = offset;
+      secText.textContent = pad(s);
+    }
+
+    renderTime();
+    setInterval(renderTime, 1000);
+  </script>
+</body>
+</html>

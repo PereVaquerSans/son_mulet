@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Son Mullet — Agroturismo en Mallorca</title>
+    <meta name="description"
+        content="Son Mullet: agroturismo auténtico en el corazón de la Serra de Tramuntana, Mallorca. Experiencias rurales, gastronomía local y la esencia del Mediterráneo." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;600;700&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        /* ============================
+       CSS CUSTOM PROPERTIES
+       ============================ */
+        :root {
+            --color-bg: #FAF5EF;
+            --color-stone: #3E2723;
+            --color-terracotta: #B85C38;
+            --color-olive: #6B7F3B;
+            --color-olive-dark: #4A5A28;
+            --color-sand: #E8D5B7;
+            --color-sand-light: #F3EBDD;
+            --color-sky: #7AACCF;
+            --color-white: #FFFFFF;
+            --color-text: #3B3028;
+            --color-text-light: #786D62;
+            --color-overlay: rgba(30, 20, 10, .55);
+
+            --font-heading: 'Playfair Display', Georgia, serif;
+            --font-body: 'Lato', 'Segoe UI', sans-serif;
+
+            --max-width: 1200px;
+            --section-pad: 100px 0;
+            --radius: 12px;
+            --transition: .35s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        /* ============================
+       RESET & BASE
+       ============================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        /* ============================
+       TYPOGRAPHY UTILITIES
+       ============================ */
+        .section-subtitle {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: .85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-terracotta);
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--color-stone);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section-desc {
+            max-width: 640px;
+            color: var(--color-text-light);
+            font-size: 1.05rem;
+        }
+
+        /* ============================
+       BUTTONS
+       ============================ */
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: .95rem;
+            letter-spacing: .5px;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn--primary {
+            background: var(--color-terracotta);
+            color: var(--color-white);
+            box-shadow: 0 4px 20px rgba(184, 92, 56, .35);
+        }
+
+        .btn--primary:hover {
+            background: #9e4a2c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(184, 92, 56, .45);
+        }
+
+        .btn--outline {
+            background: transparent;
+            color: var(--color-white);
+            border: 2px solid var(--color-white);
+        }
+
+        .btn--outline:hover {
+            background: var(--color-white);
+            color: var(--color-stone);
+        }
+
+        .btn--olive {
+            background: var(--color-olive);
+            color: var(--color-white);
+            box-shadow: 0 4px 20px rgba(107, 127, 59, .3);
+        }
+
+        .btn--olive:hover {
+            background: var(--color-olive-dark);
+            transform: translateY(-2px);
+        }
+
+        /* ============================
+       SCROLL ANIMATIONS
+       ============================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity .8s ease, transform .8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================
+       HEADER / NAVIGATION
+       ============================ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 18px 0;
+            transition: background .4s, padding .4s, box-shadow .4s;
+        }
+
+        .header.scrolled {
+            background: rgba(250, 245, 239, .95);
+            backdrop-filter: blur(12px);
+            padding: 12px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, .08);
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-white);
+            transition: color .4s;
+        }
+
+        .logo span {
+            color: var(--color-terracotta);
+        }
+
+        .header.scrolled .logo {
+            color: var(--color-stone);
+        }
+
+        .nav-list {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-list a {
+            font-size: .9rem;
+            font-weight: 600;
+            letter-spacing: .5px;
+            color: rgba(255, 255, 255, .85);
+            position: relative;
+            transition: color .3s;
+        }
+
+        .nav-list a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-terracotta);
+            transition: width .3s;
+        }
+
+        .nav-list a:hover::after {
+            width: 100%;
+        }
+
+        .header.scrolled .nav-list a {
+            color: var(--color-text);
+        }
+
+        .header.scrolled .nav-list a:hover {
+            color: var(--color-terracotta);
+        }
+
+        /* hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: var(--color-white);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .header.scrolled .hamburger span {
+            background: var(--color-stone);
+        }
+
+        /* ============================
+       HERO
+       ============================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero__bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero__bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: heroZoom 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroZoom {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.08);
+            }
+        }
+
+        .hero__bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                    rgba(30, 20, 10, .45) 0%,
+                    rgba(30, 20, 10, .25) 50%,
+                    rgba(30, 20, 10, .65) 100%);
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            animation: fadeUp 1s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero__title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 4.2rem);
+            font-weight: 700;
+            color: var(--color-white);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .hero__title em {
+            font-style: italic;
+            color: var(--color-sand);
+        }
+
+        .hero__desc {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, .8);
+            margin-bottom: 36px;
+            max-width: 540px;
+            line-height: 1.8;
+        }
+
+        .hero__buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) translateY(8px);
+            }
+        }
+
+        /* ============================
+       ABOUT
+       ============================ */
+        .about {
+            padding: var(--section-pad);
+        }
+
+        .about__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about__image {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .12);
+            position: relative;
+        }
+
+        .about__image img {
+            transition: transform .6s ease;
+            width: 100%;
+        }
+
+        .about__image:hover img {
+            transform: scale(1.04);
+        }
+
+        .about__badge {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: var(--color-terracotta);
+            color: var(--color-white);
+            padding: 16px 22px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(184, 92, 56, .3);
+        }
+
+        .about__badge strong {
+            display: block;
+            font-size: 1.8rem;
+            font-family: var(--font-heading);
+        }
+
+        .about__badge span {
+            font-size: .75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .about__text .section-desc {
+            margin-bottom: 28px;
+        }
+
+        .about__features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 32px;
+        }
+
+        .about__feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            font-size: .9rem;
+            color: var(--color-stone);
+        }
+
+        .about__feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--color-sand-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* ============================
+       EXPERIENCES
+       ============================ */
+        .experiences {
+            padding: var(--section-pad);
+            background: var(--color-sand-light);
+        }
+
+        .experiences__header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .experiences__header .section-desc {
+            margin: 0 auto;
+        }
+
+        .experiences__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .exp-card {
+            background: var(--color-white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .06);
+            transition: var(--transition);
+        }
+
+        .exp-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, .12);
+        }
+
+        .exp-card__img {
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .exp-card__img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s;
+        }
+
+        .exp-card:hover .exp-card__img img {
+            transform: scale(1.08);
+        }
+
+        .exp-card__body {
+            padding: 28px;
+        }
+
+        .exp-card__tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: .72rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(107, 127, 59, .12);
+            color: var(--color-olive);
+            margin-bottom: 12px;
+        }
+
+        .exp-card__title {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            color: var(--color-stone);
+            margin-bottom: 10px;
+        }
+
+        .exp-card__desc {
+            font-size: .92rem;
+            color: var(--color-text-light);
+            margin-bottom: 18px;
+        }
+
+        .exp-card__price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-terracotta);
+        }
+
+        .exp-card__price small {
+            font-weight: 400;
+            font-size: .8rem;
+            color: var(--color-text-light);
+        }
+
+        /* ============================
+       GALLERY STRIP
+       ============================ */
+        .gallery {
+            padding: 80px 0;
+            overflow: hidden;
+        }
+
+        .gallery__header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .gallery__strip {
+            display: flex;
+            gap: 20px;
+            animation: scrollGallery 30s linear infinite;
+        }
+
+        .gallery__item {
+            flex: 0 0 320px;
+            height: 220px;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .gallery__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .5s;
+        }
+
+        .gallery__item:hover img {
+            transform: scale(1.06);
+        }
+
+        @keyframes scrollGallery {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ============================
+       BOOKING
+       ============================ */
+        .booking {
+            padding: var(--section-pad);
+            background: var(--color-stone);
+            color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(184, 92, 56, .15);
+            filter: blur(80px);
+        }
+
+        .booking__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .booking__info .section-subtitle {
+            color: var(--color-sand);
+        }
+
+        .booking__info .section-title {
+            color: var(--color-white);
+        }
+
+        .booking__info .section-desc {
+            color: rgba(255, 255, 255, .7);
+            margin-bottom: 28px;
+        }
+
+        .booking__perks {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .booking__perk {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: .95rem;
+            color: rgba(255, 255, 255, .85);
+        }
+
+        .booking__perk-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        /* booking form */
+        .booking__form {
+            background: rgba(255, 255, 255, .06);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 16px;
+            padding: 40px;
+        }
+
+        .booking__form h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: .82rem;
+            font-weight: 600;
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .6);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .05);
+            color: var(--color-white);
+            font-family: var(--font-body);
+            font-size: .95rem;
+            transition: border-color .3s;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, .35);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-terracotta);
+        }
+
+        .form-group select option {
+            background: var(--color-stone);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .booking__form .btn {
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        /* ============================
+       CONTACT
+       ============================ */
+        .contact {
+            padding: var(--section-pad);
+        }
+
+        .contact__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact__info-items {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            margin-top: 32px;
+        }
+
+        .contact__info-item {
+            display: flex;
+            gap: 16px;
+        }
+
+        .contact__info-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--color-sand-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .contact__info-label {
+            font-size: .8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-text-light);
+            margin-bottom: 2px;
+        }
+
+        .contact__info-value {
+            font-weight: 600;
+            color: var(--color-stone);
+        }
+
+        /* contact form */
+        .contact__form {
+            background: var(--color-white);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, .07);
+        }
+
+        .contact__form h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--color-stone);
+            margin-bottom: 28px;
+        }
+
+        .contact__form .form-group label {
+            color: var(--color-text-light);
+        }
+
+        .contact__form .form-group input,
+        .contact__form .form-group textarea {
+            background: var(--color-sand-light);
+            color: var(--color-text);
+            border: 1px solid var(--color-sand);
+        }
+
+        .contact__form .form-group input::placeholder,
+        .contact__form .form-group textarea::placeholder {
+            color: var(--color-text-light);
+        }
+
+        .contact__form .form-group input:focus,
+        .contact__form .form-group textarea:focus {
+            border-color: var(--color-terracotta);
+        }
+
+        .contact__form textarea {
+            resize: none;
+            overflow: auto;
+            min-height: 120px;
+        }
+
+        /* ============================
+       FOOTER
+       ============================ */
+        .footer {
+            background: var(--color-stone);
+            color: rgba(255, 255, 255, .7);
+            padding: 60px 0 30px;
+        }
+
+        .footer__grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer__brand .logo {
+            margin-bottom: 16px;
+        }
+
+        .footer__brand p {
+            font-size: .9rem;
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .footer__col h4 {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            color: var(--color-white);
+            margin-bottom: 18px;
+        }
+
+        .footer__col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer__col ul li a {
+            font-size: .88rem;
+            color: rgba(255, 255, 255, .6);
+            transition: color .3s;
+        }
+
+        .footer__col ul li a:hover {
+            color: var(--color-terracotta);
+        }
+
+        .footer__bottom {
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            padding-top: 24px;
+            text-align: center;
+            font-size: .82rem;
+            color: rgba(255, 255, 255, .4);
+        }
+
+        /* ============================
+       RESPONSIVE
+       ============================ */
+        @media (max-width: 992px) {
+
+            .about__grid,
+            .booking__grid,
+            .contact__grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .experiences__grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer__grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-pad: 70px 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-list {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 320px;
+                height: 100vh;
+                background: var(--color-stone);
+                flex-direction: column;
+                padding: 80px 40px 40px;
+                gap: 24px;
+                transition: right .4s ease;
+                box-shadow: -4px 0 30px rgba(0, 0, 0, .3);
+            }
+
+            .nav-list.open {
+                right: 0;
+            }
+
+            .nav-list a {
+                color: rgba(255, 255, 255, .85) !important;
+                font-size: 1.1rem;
+            }
+
+            .overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, .5);
+                z-index: 998;
+            }
+
+            .overlay.show {
+                display: block;
+            }
+
+            .experiences__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about__features {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .hero__title {
+                font-size: clamp(1.5rem, 7vw, 3rem);
+            }
+
+            .footer__grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .gallery__item {
+                flex: 0 0 250px;
+                height: 170px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero__buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+            .booking__form {
+                padding: 28px 20px;
+            }
+
+            .contact__form {
+                padding: 28px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== OVERLAY (mobile nav) ===== -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="#" class="logo">Son <span>Mullet</span></a>
+
+            <nav>
+                <ul class="nav-list" id="navList">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#experiencias">Experiencias</a></li>
+                    <li><a href="#reservas">Reservas</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <button class="hamburger" id="hamburger" aria-label="Menú de navegación">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="inicio">
+        <div class="hero__bg">
+            <img src="images/header_background.png"
+                alt="Finca Son Mullet al atardecer con la Serra de Tramuntana de fondo" />
+        </div>
+
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title">Vive la<br><em>esencia mediterránea</em></h1>
+                <p class="hero__desc">
+                    Descubre Son Mullet, una finca tradicional mallorquina en el corazón de la
+                    serra. Experiencias auténticas, gastronomía de kilómetro cero y la paz
+                    que solo un monte de Mallorca puede ofrecer.
+                </p>
+                <div class="hero__buttons">
+                    <a href="#reservas" class="btn btn--primary">Reservar estancia</a>
+                    <a href="#experiencias" class="btn btn--outline">Explorar experiencias</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about" id="nosotros">
+        <div class="container">
+            <div class="about__grid">
+                <div class="about__image reveal">
+                    <img src="images/landscape.png" alt="Paisaje de la Serra de Tramuntana" />
+                    <div class="about__badge">
+                        <strong>+30</strong>
+                        <span>Años de tradición</span>
+                    </div>
+                </div>
+
+                <div class="about__text reveal">
+                    <p class="section-subtitle">Sobre nosotros</p>
+                    <h2 class="section-title">Una finca con alma mallorquina</h2>
+                    <p class="section-desc">
+                        Son Mullet es más que un alojamiento: es una ventana a la vida rural
+                        mallorquina. Situada en un monte de la Serra de Tramuntana, nuestra
+                        finca familiar combina la arquitectura de piedra seca con el confort
+                        contemporáneo.
+                    </p>
+                    <p class="section-desc" style="margin-top:14px;">
+                        Aquí podrás pasear entre olivos centenarios, degustar la cocina
+                        tradicional con productos de nuestra huerta y contemplar los
+                        atardeceres más espectaculares de la isla.
+                    </p>
+
+                    <div class="about__features">
+                        <div class="about__feature">
+                            <div class="about__feature-icon">🫒</div>
+                            Olivar propio
+                        </div>
+                        <div class="about__feature">
+                            <div class="about__feature-icon">🍷</div>
+                            Bodega local
+                        </div>
+                        <div class="about__feature">
+                            <div class="about__feature-icon">🏔️</div>
+                            Rutas de senderismo
+                        </div>
+                        <div class="about__feature">
+                            <div class="about__feature-icon">🌿</div>
+                            Huerto ecológico
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXPERIENCES ===== -->
+    <section class="experiences" id="experiencias">
+        <div class="container">
+            <div class="experiences__header reveal">
+                <p class="section-subtitle">Nuestras experiencias</p>
+                <h2 class="section-title">Mallorca como nunca la has vivido</h2>
+                <p class="section-desc">
+                    Diseñamos cada experiencia para que sientas la isla con los cinco sentidos.
+                    Desde la recogida de aceitunas hasta cenas bajo las estrellas.
+                </p>
+            </div>
+
+            <div class="experiences__grid">
+                <!-- Card 1 -->
+                <article class="exp-card reveal">
+                    <div class="exp-card__img">
+                        <img src="images/olives.png" alt="Recogida de aceitunas en Son Mullet" />
+                    </div>
+                    <div class="exp-card__body">
+                        <span class="exp-card__tag">Tradición</span>
+                        <h3 class="exp-card__title">Recogida de aceitunas</h3>
+                        <p class="exp-card__desc">
+                            Participa en la tafona y descubre el proceso artesanal del aceite
+                            de oliva mallorquín, desde el árbol hasta la botella.
+                        </p>
+                        <p class="exp-card__price">45 € <small>/ persona</small></p>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="exp-card reveal">
+                    <div class="exp-card__img">
+                        <img src="images/dining.png" alt="Cena mediterránea al aire libre" />
+                    </div>
+                    <div class="exp-card__body">
+                        <span class="exp-card__tag">Gastronomía</span>
+                        <h3 class="exp-card__title">Cena bajo las estrellas</h3>
+                        <p class="exp-card__desc">
+                            Cena con productos de nuestra huerta y cocina mallorquina
+                            tradicional bajo el cielo estrellado de la serra.
+                        </p>
+                        <p class="exp-card__price">65 € <small>/ persona</small></p>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="exp-card reveal">
+                    <div class="exp-card__img">
+                        <img src="images/room.png" alt="Habitación en la finca Son Mullet" />
+                    </div>
+                    <div class="exp-card__body">
+                        <span class="exp-card__tag">Alojamiento</span>
+                        <h3 class="exp-card__title">Estancia en la finca</h3>
+                        <p class="exp-card__desc">
+                            Habitaciones con carácter: piedra, madera y ropa de lino.
+                            Despierta con el canto de los pájaros y el aroma a romero.
+                        </p>
+                        <p class="exp-card__price">120 € <small>/ noche</small></p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="gallery">
+        <div class="gallery__header reveal">
+            <p class="section-subtitle">Galería</p>
+            <h2 class="section-title">Rincones de Son Mullet</h2>
+        </div>
+
+        <div class="gallery__strip" id="galleryStrip">
+            <div class="gallery__item"><img src="images/hero.png" alt="Vista de la finca" /></div>
+            <div class="gallery__item"><img src="images/landscape.png" alt="Paisaje de Tramuntana" /></div>
+            <div class="gallery__item"><img src="images/dining.png" alt="Cena al aire libre" /></div>
+            <div class="gallery__item"><img src="images/olives.png" alt="Olivar" /></div>
+            <div class="gallery__item"><img src="images/room.png" alt="Habitación rústica" /></div>
+            <!-- duplicated for infinite scroll -->
+            <div class="gallery__item"><img src="images/hero.png" alt="Vista de la finca" /></div>
+            <div class="gallery__item"><img src="images/landscape.png" alt="Paisaje de Tramuntana" /></div>
+            <div class="gallery__item"><img src="images/dining.png" alt="Cena al aire libre" /></div>
+            <div class="gallery__item"><img src="images/olives.png" alt="Olivar" /></div>
+            <div class="gallery__item"><img src="images/room.png" alt="Habitación rústica" /></div>
+        </div>
+    </section>
+
+    <!-- ===== BOOKING ===== -->
+    <section class="booking" id="reservas">
+        <div class="container">
+            <div class="booking__grid">
+                <div class="booking__info reveal">
+                    <p class="section-subtitle">Reservas</p>
+                    <h2 class="section-title">Reserva tu escapada</h2>
+                    <p class="section-desc">
+                        Ya sea una escapada de fin de semana o una estancia más larga,
+                        prepararemos todo para que disfrutes al máximo de la vida rural mallorquina.
+                    </p>
+
+                    <div class="booking__perks">
+                        <div class="booking__perk">
+                            <div class="booking__perk-icon">✓</div>
+                            Cancelación gratuita hasta 48 h antes
+                        </div>
+                        <div class="booking__perk">
+                            <div class="booking__perk-icon">✓</div>
+                            Desayuno mallorquín incluido
+                        </div>
+                        <div class="booking__perk">
+                            <div class="booking__perk-icon">✓</div>
+                            Acceso al huerto y la piscina natural
+                        </div>
+                        <div class="booking__perk">
+                            <div class="booking__perk-icon">✓</div>
+                            Traslado desde Palma disponible
+                        </div>
+                    </div>
+                </div>
+
+                <form class="booking__form reveal" id="bookingForm">
+                    <h3>Solicita tu reserva</h3>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookName">Nombre</label>
+                            <input type="text" id="bookName" placeholder="Tu nombre completo" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="bookEmail">Email</label>
+                            <input type="email" id="bookEmail" placeholder="correo@ejemplo.com" required />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookCheckin">Entrada</label>
+                            <input type="date" id="bookCheckin" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="bookCheckout">Salida</label>
+                            <input type="date" id="bookCheckout" required />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bookGuests">Huéspedes</label>
+                            <select id="bookGuests">
+                                <option value="1">1 adulto</option>
+                                <option value="2" selected>2 adultos</option>
+                                <option value="3">3 adultos</option>
+                                <option value="4">4 adultos</option>
+                                <option value="5">5+ adultos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookType">Tipo de estancia</label>
+                            <select id="bookType">
+                                <option value="habitacion">Habitación</option>
+                                <option value="suite">Suite</option>
+                                <option value="finca-completa">Finca completa</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookNotes">Notas adicionales</label>
+                        <textarea id="bookNotes" placeholder="Alergias, preferencias, etc." rows="3"
+                            style="resize: none; overflow: auto;"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary">Solicitar reserva</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <div class="contact__grid">
+                <div class="contact__info reveal">
+                    <p class="section-subtitle">Contacto</p>
+                    <h2 class="section-title">¿Tienes alguna pregunta?</h2>
+                    <p class="section-desc">
+                        Estaremos encantados de ayudarte a planificar tu escapada perfecta.
+                        No dudes en escribirnos o llamarnos.
+                    </p>
+
+                    <div class="contact__info-items">
+                        <div class="contact__info-item">
+                            <div class="contact__info-icon">📍</div>
+                            <div>
+                                <p class="contact__info-label">Dirección</p>
+                                <p class="contact__info-value">Camí de Son Mullet, s/n<br>Serra de Tramuntana, Mallorca
+                                </p>
+                            </div>
+                        </div>
+                        <div class="contact__info-item">
+                            <div class="contact__info-icon">📞</div>
+                            <div>
+                                <p class="contact__info-label">Teléfono</p>
+                                <p class="contact__info-value">+34 971 123 456</p>
+                            </div>
+                        </div>
+                        <div class="contact__info-item">
+                            <div class="contact__info-icon">✉️</div>
+                            <div>
+                                <p class="contact__info-label">Email</p>
+                                <p class="contact__info-value">hola@sonmullet.com</p>
+                            </div>
+                        </div>
+                        <div class="contact__info-item">
+                            <div class="contact__info-icon">🕐</div>
+                            <div>
+                                <p class="contact__info-label">Horario</p>
+                                <p class="contact__info-value">Lun – Dom: 09:00 – 20:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact__form reveal" id="contactForm">
+                    <h3>Envíanos un mensaje</h3>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contactName">Nombre</label>
+                            <input type="text" id="contactName" placeholder="Tu nombre" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Email</label>
+                            <input type="email" id="contactEmail" placeholder="correo@ejemplo.com" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactSubject">Asunto</label>
+                        <input type="text" id="contactSubject" placeholder="¿Sobre qué nos quieres consultar?" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactMessage">Mensaje</label>
+                        <textarea id="contactMessage" placeholder="Escribe tu mensaje aquí…" rows="5"
+                            required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn--olive">Enviar mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <div class="logo">Son <span>Mullet</span></div>
+                    <p>
+                        Agroturismo familiar en la Serra de Tramuntana. Tradición, naturaleza
+                        y la auténtica esencia de Mallorca.
+                    </p>
+                </div>
+
+                <div class="footer__col">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#experiencias">Experiencias</a></li>
+                        <li><a href="#reservas">Reservas</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__col">
+                    <h4>Experiencias</h4>
+                    <ul>
+                        <li><a href="#experiencias">Recogida de aceitunas</a></li>
+                        <li><a href="#experiencias">Cena bajo las estrellas</a></li>
+                        <li><a href="#experiencias">Senderismo guiado</a></li>
+                        <li><a href="#experiencias">Taller de cerámica</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Aviso legal</a></li>
+                        <li><a href="#">Política de privacidad</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                &copy; 2026 Son Mullet Agroturismo. Tots els drets reservats.
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        /* --- Header scroll --- */
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        /* --- Mobile nav --- */
+        const hamburger = document.getElementById('hamburger');
+        const navList = document.getElementById('navList');
+        const overlay = document.getElementById('overlay');
+
+        function toggleNav() {
+            navList.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        hamburger.addEventListener('click', toggleNav);
+        overlay.addEventListener('click', toggleNav);
+        navList.querySelectorAll('a').forEach(link =>
+            link.addEventListener('click', () => {
+                navList.classList.remove('open');
+                overlay.classList.remove('show');
+            })
+        );
+
+        /* --- Scroll reveal --- */
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(el => revealObserver.observe(el));
+
+        /* --- Smooth anchor scroll --- */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    const offset = header.offsetHeight + 10;
+                    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        /* --- Form submissions (demo) --- */
+        document.getElementById('bookingForm').addEventListener('submit', e => {
+            e.preventDefault();
+            alert('¡Gracias! Hemos recibido tu solicitud de reserva. Te contactaremos pronto.');
+            e.target.reset();
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', e => {
+            e.preventDefault();
+            alert('¡Mensaje enviado! Te responderemos lo antes posible.');
+            e.target.reset();
+        });
+    </script>
+</body>
+
+</html>

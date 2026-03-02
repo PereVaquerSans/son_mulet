@@ -1,0 +1,62 @@
+<!-- ===== OVERLAY (mobile nav) ===== -->
+<div class="overlay" id="overlay"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+    <div class="container">
+        <a href="/" class="logo">Son <span>Mullet</span></a>
+
+        <nav>
+            <ul class="nav-list" id="navList">
+                <li><a href="/<%= currentLang !== 'ca' ? '?lang=' + currentLang : '' %>#inicio">
+                        <%= t('nav.home') %>
+                    </a></li>
+                <li><a href="/<%= currentLang !== 'ca' ? '?lang=' + currentLang : '' %>#nosaltres">
+                        <%= t('nav.about') %>
+                    </a></li>
+                <li><a href="/<%= currentLang !== 'ca' ? '?lang=' + currentLang : '' %>#experiencies">
+                        <%= t('nav.experiences') %>
+                    </a></li>
+                <li><a href="/<%= currentLang !== 'ca' ? '?lang=' + currentLang : '' %>#reserves">
+                        <%= t('nav.booking') %>
+                    </a></li>
+                <li><a href="/<%= currentLang !== 'ca' ? '?lang=' + currentLang : '' %>#contacte">
+                        <%= t('nav.contact') %>
+                    </a></li>
+                <% if (user) { %>
+                    <li><a href="/intranet" class="nav-intranet">
+                            <%= t('nav.intranet') %>
+                        </a></li>
+                    <li><a href="/logout" class="nav-logout">
+                            <%= t('nav.logout') %>
+                        </a></li>
+                    <% } else { %>
+                        <li><a href="/login<%= currentLang !== 'ca' ? '?lang=' + currentLang : '' %>" class="nav-login">
+                                <%= t('nav.login') %>
+                            </a></li>
+                        <% } %>
+            </ul>
+        </nav>
+
+        <!-- Language Switcher -->
+        <div class="lang-switcher">
+            <a href="?lang=ca" class="lang-btn<%= currentLang === 'ca' ? ' active' : '' %>" title="Català">CA</a>
+            <a href="?lang=en" class="lang-btn<%= currentLang === 'en' ? ' active' : '' %>" title="English">EN</a>
+            <a href="?lang=de" class="lang-btn<%= currentLang === 'de' ? ' active' : '' %>" title="Deutsch">DE</a>
+        </div>
+
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<!-- Flash Messages -->
+<% if (flash) { %>
+    <div class="flash-message flash-<%= flash.type %>" id="flashMessage">
+        <span>
+            <%= flash.message %>
+        </span>
+        <button onclick="this.parentElement.remove()">✕</button>
+    </div>
+    <% } %>

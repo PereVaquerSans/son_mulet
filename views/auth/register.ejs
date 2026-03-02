@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="<%= currentLang %>">
+
+<head>
+    <%- include('../partials/head') %>
+</head>
+
+<body class="auth-body">
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <a href="/" class="auth-logo">Son <span>Mullet</span></a>
+            <h1 class="auth-title">
+                <%= t('auth.register_title') %>
+            </h1>
+            <p class="auth-subtitle">
+                <%= t('auth.register_subtitle') %>
+            </p>
+
+            <% if (error) { %>
+                <div class="auth-error">
+                    <%= error %>
+                </div>
+                <% } %>
+
+                    <form action="/register" method="POST" class="auth-form">
+                        <div class="form-group">
+                            <label for="username">
+                                <%= t('auth.label_username') %>
+                            </label>
+                            <input type="text" id="username" name="username"
+                                placeholder="<%= t('auth.placeholder_username') %>" required minlength="3" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">
+                                <%= t('auth.label_email') %>
+                            </label>
+                            <input type="email" id="email" name="email" placeholder="<%= t('auth.placeholder_email') %>"
+                                required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">
+                                <%= t('auth.label_password') %>
+                            </label>
+                            <input type="password" id="password" name="password"
+                                placeholder="<%= t('auth.placeholder_password') %>" required minlength="6" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword">
+                                <%= t('auth.label_confirm') %>
+                            </label>
+                            <input type="password" id="confirmPassword" name="confirmPassword"
+                                placeholder="<%= t('auth.placeholder_confirm') %>" required minlength="6" />
+                        </div>
+
+                        <button type="submit" class="btn btn--primary btn--full">
+                            <%= t('auth.btn_register') %>
+                        </button>
+                    </form>
+
+                    <div class="auth-links">
+                        <a href="/login<%= currentLang !== 'ca' ? '?lang=' + currentLang : '' %>">
+                            <%= t('auth.link_login') %>
+                        </a>
+                        <a href="/">
+                            <%= t('auth.link_home') %>
+                        </a>
+                    </div>
+
+                    <div class="auth-lang">
+                        <a href="?lang=ca" class="lang-btn<%= currentLang === 'ca' ? ' active' : '' %>">CA</a>
+                        <a href="?lang=en" class="lang-btn<%= currentLang === 'en' ? ' active' : '' %>">EN</a>
+                        <a href="?lang=de" class="lang-btn<%= currentLang === 'de' ? ' active' : '' %>">DE</a>
+                    </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

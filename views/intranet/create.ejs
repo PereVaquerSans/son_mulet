@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="<%= currentLang %>">
+
+<head>
+    <%- include('../partials/head') %>
+</head>
+
+<body>
+    <%- include('../partials/header') %>
+
+        <main class="intranet-main">
+            <div class="container">
+                <div class="intranet-header">
+                    <div>
+                        <p class="section-subtitle">
+                            <%= t('intranet.subtitle') %>
+                        </p>
+                        <h1 class="section-title">
+                            <%= t('intranet.create_title') %>
+                        </h1>
+                    </div>
+                    <a href="/intranet" class="btn btn--outline-dark">
+                        <%= t('intranet.btn_back') %>
+                    </a>
+                </div>
+
+                <% if (error) { %>
+                    <div class="auth-error">
+                        <%= error %>
+                    </div>
+                    <% } %>
+
+                        <form action="/intranet" method="POST" class="intranet-form">
+                            <div class="form-group">
+                                <label for="title">
+                                    <%= t('intranet.label_title') %>
+                                </label>
+                                <input type="text" id="title" name="title"
+                                    placeholder="<%= t('intranet.placeholder_title') %>" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="content">
+                                    <%= t('intranet.label_content') %>
+                                </label>
+                                <textarea id="content" name="content"
+                                    placeholder="<%= t('intranet.placeholder_content') %>" rows="6" required></textarea>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="category">
+                                        <%= t('intranet.label_category') %>
+                                    </label>
+                                    <select id="category" name="category">
+                                        <option value="general">
+                                            <%= t('intranet.category_general') %>
+                                        </option>
+                                        <option value="incidencia">
+                                            <%= t('intranet.category_incidencia') %>
+                                        </option>
+                                        <option value="observacio">
+                                            <%= t('intranet.category_observacio') %>
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="priority">
+                                        <%= t('intranet.label_priority') %>
+                                    </label>
+                                    <select id="priority" name="priority">
+                                        <option value="mitjana">
+                                            <%= t('intranet.priority_mitjana') %>
+                                        </option>
+                                        <option value="alta">
+                                            <%= t('intranet.priority_alta') %>
+                                        </option>
+                                        <option value="baixa">
+                                            <%= t('intranet.priority_baixa') %>
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn--primary">
+                                <%= t('intranet.btn_create') %>
+                            </button>
+                        </form>
+            </div>
+        </main>
+
+        <%- include('../partials/footer') %>
+</body>
+
+</html>

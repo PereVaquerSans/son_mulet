@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="<%= currentLang %>">
+
+<head>
+    <%- include('../partials/head') %>
+</head>
+
+<body>
+    <%- include('../partials/header') %>
+
+        <main class="intranet-main">
+            <div class="container">
+                <div class="intranet-header">
+                    <div>
+                        <p class="section-subtitle">
+                            <%= t('intranet.subtitle') %>
+                        </p>
+                        <h1 class="section-title">
+                            <%= t('intranet.title') %>
+                        </h1>
+                        <p class="intranet-welcome">
+                            <%= t('intranet.welcome') %> <strong>
+                                    <%= user.username %>
+                                </strong>
+                        </p>
+                    </div>
+                    <a href="/intranet/new" class="btn btn--primary">
+                        <%= t('intranet.new_note') %>
+                    </a>
+                </div>
+
+                <!-- Filters -->
+                <div class="intranet-filters">
+                    <form method="GET" action="/intranet" class="filter-form">
+                        <div class="filter-group">
+                            <label>
+                                <%= t('intranet.filter_category') %>
+                            </label>
+                            <select name="category" onchange="this.form.submit()">
+                                <option value="">
+                                    <%= t('intranet.filter_all') %>
+                                </option>
+                                <option value="incidencia" <%=filterCategory==='incidencia' ? 'selected' : '' %>><%=
+                                        t('intranet.category_incidencia') %>
+                                </option>
+                                <option value="observacio" <%=filterCategory==='observacio' ? 'selected' : '' %>><%=
+                                        t('intranet.category_observacio') %>
+                                </option>
+                                <option value="general" <%=filterCategory==='general' ? 'selected' : '' %>><%=
+                                        t('intranet.category_general') %>
+                                </option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>
+                                <%= t('intranet.filter_priority') %>
+                            </label>
+                            <select name="priority" onchange="this.form.submit()">
+                                <option value="">
+                                    <%= t('intranet.filter_all') %>
+                                </option>
+                                <option value="alta" <%=filterPriority==='alta' ? 'selected' : '' %>><%=
+                                        t('intranet.priority_alta') %>
+                                </option>
+                                <option value="mitjana" <%=filterPriority==='mitjana' ? 'selected' : '' %>><%=
+                                        t('intranet.priority_mitjana') %>
+                                </option>
+                                <option value="baixa" <%=filterPriority==='baixa' ? 'selected' : '' %>><%=
+                                        t('intranet.priority_baixa') %>
+                                </option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <% if (typeof error !=='undefined' && error) { %>
+                    <div class="auth-error">
+                        <%= error %>
+                    </div>
+                    <% } %>
+
+                        <% if (notes.length===0) { %>
+                            <div class="intranet-empty">
+                                <p>📝 <%= t('intranet.no_notes') %>
+                                </p>
+                            </div>
+                            <% } else { %>
+                                <div class="notes-grid">
+                                    <% notes.forEach(function(note) { %>
+                                        <div class="note-card note-priority-<%= note.priority %>">
+                                            <div class="note-card__header">
+                                                <span class="note-category note-category-<%= note.category %>">
+                                                    <%= t('intranet.category_' + note.category) %>
+                                                </span>
+                                                <span class="note-priority">
+                                                    <%= t('intranet.priority_' + note.priority) %>
+                                                </span>
+                                            </div>
+                                            <h3 class="note-card__title">
+                                                <%= note.title %>
+                                            </h3>
+                                            <p class="note-card__content">
+                                                <%= note.content %>
+                                            </p>
+                                            <div class="note-card__footer">
+                                                <span class="note-meta">
+                                                    <%= t('intranet.by') %> <strong>
+                                                            <%= note.author ? note.author.username : '—' %>
+                                                        </strong>
+                                                        · <%= note.createdAt.toLocaleDateString() %>
+                                                </span>
+                                                <div class="note-actions">
+                                                    <a href="/intranet/<%= note._id %>/edit"
+                                                        class="btn-sm btn-sm--edit">
+                                                        <%= t('intranet.btn_edit') %>
+                                                    </a>
+                                                    <form action="/intranet/<%= note._id %>?_method=DELETE"
+                                                        method="POST" style="display:inline;"
+                                                        onsubmit="return confirm('<%= t('intranet.confirm_delete') %>')">
+                                                        <button type="submit" class="btn-sm btn-sm--delete">
+                                                            <%= t('intranet.btn_delete') %>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }); %>
+                                </div>
+                                <% } %>
+            </div>
+        </main>
+
+        <%- include('../partials/footer') %>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{
+  "name": "sonmullet",
+  "version": "1.0.0",
+  "description": "Son Mullet — Agroturismo auténtico en la Serra de Tramuntana, Mallorca",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": ["agroturismo", "mallorca", "tramuntana", "nodejs", "mongodb"],
+  "author": "",
+  "license": "CC0-1.0",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "express-session": "^1.18.0",
+    "helmet": "^7.1.0",
+    "i18next": "^23.15.1",
+    "i18next-fs-backend": "^2.3.2",
+    "i18next-http-middleware": "^3.6.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.7.0"
+  }
+}

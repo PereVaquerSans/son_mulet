@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="<%= currentLang %>">
+
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <%- include('partials/header') %>
+
+        <!-- ===== HERO ===== -->
+        <section class="hero" id="inicio">
+            <div class="hero__bg">
+                <img src="/images/header_background.png" alt="Finca Son Mullet — Serra de Tramuntana" />
+            </div>
+
+            <div class="container">
+                <div class="hero__content">
+                    <h1 class="hero__title">
+                        <%= t('hero.title_1') %><br><em>
+                                <%= t('hero.title_2') %>
+                            </em>
+                    </h1>
+                    <p class="hero__desc">
+                        <%= t('hero.description') %>
+                    </p>
+                    <div class="hero__buttons">
+                        <a href="#reserves" class="btn btn--primary">
+                            <%= t('hero.cta_booking') %>
+                        </a>
+                        <a href="#experiencies" class="btn btn--outline">
+                            <%= t('hero.cta_experiences') %>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ABOUT ===== -->
+        <section class="about" id="nosaltres">
+            <div class="container">
+                <div class="about__grid">
+                    <div class="about__image reveal">
+                        <img src="/images/landscape.png" alt="<%= t('about.title') %>" />
+                        <div class="about__badge">
+                            <strong>
+                                <%= t('about.badge_years') %>
+                            </strong>
+                            <span>
+                                <%= t('about.badge_label') %>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="about__text reveal">
+                        <p class="section-subtitle">
+                            <%= t('about.subtitle') %>
+                        </p>
+                        <h2 class="section-title">
+                            <%= t('about.title') %>
+                        </h2>
+                        <p class="section-desc">
+                            <%= t('about.desc_1') %>
+                        </p>
+                        <p class="section-desc" style="margin-top:14px;">
+                            <%= t('about.desc_2') %>
+                        </p>
+
+                        <div class="about__features">
+                            <div class="about__feature">
+                                <div class="about__feature-icon">🫒</div>
+                                <%= t('about.feature_olive') %>
+                            </div>
+                            <div class="about__feature">
+                                <div class="about__feature-icon">🍷</div>
+                                <%= t('about.feature_wine') %>
+                            </div>
+                            <div class="about__feature">
+                                <div class="about__feature-icon">🏔️</div>
+                                <%= t('about.feature_hiking') %>
+                            </div>
+                            <div class="about__feature">
+                                <div class="about__feature-icon">🌿</div>
+                                <%= t('about.feature_garden') %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== EXPERIENCES ===== -->
+        <section class="experiences" id="experiencies">
+            <div class="container">
+                <div class="experiences__header reveal">
+                    <p class="section-subtitle">
+                        <%= t('experiences.subtitle') %>
+                    </p>
+                    <h2 class="section-title">
+                        <%= t('experiences.title') %>
+                    </h2>
+                    <p class="section-desc">
+                        <%= t('experiences.description') %>
+                    </p>
+                </div>
+
+                <div class="experiences__grid">
+                    <!-- Card 1 -->
+                    <article class="exp-card reveal">
+                        <div class="exp-card__img">
+                            <img src="/images/olives.png" alt="<%= t('experiences.card1_title') %>" />
+                        </div>
+                        <div class="exp-card__body">
+                            <span class="exp-card__tag">
+                                <%= t('experiences.card1_tag') %>
+                            </span>
+                            <h3 class="exp-card__title">
+                                <%= t('experiences.card1_title') %>
+                            </h3>
+                            <p class="exp-card__desc">
+                                <%= t('experiences.card1_desc') %>
+                            </p>
+                            <p class="exp-card__price">
+                                <%= t('experiences.card1_price') %> <small>
+                                        <%= t('experiences.card1_unit') %>
+                                    </small>
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="exp-card reveal">
+                        <div class="exp-card__img">
+                            <img src="/images/dining.png" alt="<%= t('experiences.card2_title') %>" />
+                        </div>
+                        <div class="exp-card__body">
+                            <span class="exp-card__tag">
+                                <%= t('experiences.card2_tag') %>
+                            </span>
+                            <h3 class="exp-card__title">
+                                <%= t('experiences.card2_title') %>
+                            </h3>
+                            <p class="exp-card__desc">
+                                <%= t('experiences.card2_desc') %>
+                            </p>
+                            <p class="exp-card__price">
+                                <%= t('experiences.card2_price') %> <small>
+                                        <%= t('experiences.card2_unit') %>
+                                    </small>
+                            </p>
+                        </div>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="exp-card reveal">
+                        <div class="exp-card__img">
+                            <img src="/images/room.png" alt="<%= t('experiences.card3_title') %>" />
+                        </div>
+                        <div class="exp-card__body">
+                            <span class="exp-card__tag">
+                                <%= t('experiences.card3_tag') %>
+                            </span>
+                            <h3 class="exp-card__title">
+                                <%= t('experiences.card3_title') %>
+                            </h3>
+                            <p class="exp-card__desc">
+                                <%= t('experiences.card3_desc') %>
+                            </p>
+                            <p class="exp-card__price">
+                                <%= t('experiences.card3_price') %> <small>
+                                        <%= t('experiences.card3_unit') %>
+                                    </small>
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== GALLERY ===== -->
+        <section class="gallery">
+            <div class="gallery__header reveal">
+                <p class="section-subtitle">
+                    <%= t('gallery.subtitle') %>
+                </p>
+                <h2 class="section-title">
+                    <%= t('gallery.title') %>
+                </h2>
+            </div>
+
+            <div class="gallery__strip" id="galleryStrip">
+                <div class="gallery__item"><img src="/images/hero.png" alt="Son Mullet" /></div>
+                <div class="gallery__item"><img src="/images/landscape.png" alt="Tramuntana" /></div>
+                <div class="gallery__item"><img src="/images/dining.png" alt="Dining" /></div>
+                <div class="gallery__item"><img src="/images/olives.png" alt="Olives" /></div>
+                <div class="gallery__item"><img src="/images/room.png" alt="Room" /></div>
+                <!-- duplicated for infinite scroll -->
+                <div class="gallery__item"><img src="/images/hero.png" alt="Son Mullet" /></div>
+                <div class="gallery__item"><img src="/images/landscape.png" alt="Tramuntana" /></div>
+                <div class="gallery__item"><img src="/images/dining.png" alt="Dining" /></div>
+                <div class="gallery__item"><img src="/images/olives.png" alt="Olives" /></div>
+                <div class="gallery__item"><img src="/images/room.png" alt="Room" /></div>
+            </div>
+        </section>
+
+        <!-- ===== BOOKING ===== -->
+        <section class="booking" id="reserves">
+            <div class="container">
+                <div class="booking__grid">
+                    <div class="booking__info reveal">
+                        <p class="section-subtitle">
+                            <%= t('booking_section.subtitle') %>
+                        </p>
+                        <h2 class="section-title">
+                            <%= t('booking_section.title') %>
+                        </h2>
+                        <p class="section-desc">
+                            <%= t('booking_section.description') %>
+                        </p>
+
+                        <div class="booking__perks">
+                            <div class="booking__perk">
+                                <div class="booking__perk-icon">✓</div>
+                                <%= t('booking_section.perk1') %>
+                            </div>
+                            <div class="booking__perk">
+                                <div class="booking__perk-icon">✓</div>
+                                <%= t('booking_section.perk2') %>
+                            </div>
+                            <div class="booking__perk">
+                                <div class="booking__perk-icon">✓</div>
+                                <%= t('booking_section.perk3') %>
+                            </div>
+                            <div class="booking__perk">
+                                <div class="booking__perk-icon">✓</div>
+                                <%= t('booking_section.perk4') %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="booking__form reveal" id="bookingForm" action="/booking" method="POST">
+                        <h3>
+                            <%= t('booking_section.form_title') %>
+                        </h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bookName">
+                                    <%= t('booking_section.label_name') %>
+                                </label>
+                                <input type="text" id="bookName" name="name"
+                                    placeholder="<%= t('booking_section.placeholder_name') %>" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="bookEmail">
+                                    <%= t('booking_section.label_email') %>
+                                </label>
+                                <input type="email" id="bookEmail" name="email"
+                                    placeholder="<%= t('booking_section.placeholder_email') %>" required />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bookCheckin">
+                                    <%= t('booking_section.label_checkin') %>
+                                </label>
+                                <input type="date" id="bookCheckin" name="checkin" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="bookCheckout">
+                                    <%= t('booking_section.label_checkout') %>
+                                </label>
+                                <input type="date" id="bookCheckout" name="checkout" required />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bookGuests">
+                                    <%= t('booking_section.label_guests') %>
+                                </label>
+                                <select id="bookGuests" name="guests">
+                                    <option value="1">
+                                        <%= t('booking_section.option_1') %>
+                                    </option>
+                                    <option value="2" selected>
+                                        <%= t('booking_section.option_2') %>
+                                    </option>
+                                    <option value="3">
+                                        <%= t('booking_section.option_3') %>
+                                    </option>
+                                    <option value="4">
+                                        <%= t('booking_section.option_4') %>
+                                    </option>
+                                    <option value="5">
+                                        <%= t('booking_section.option_5') %>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="bookType">
+                                    <%= t('booking_section.label_type') %>
+                                </label>
+                                <select id="bookType" name="type">
+                                    <option value="habitacion">
+                                        <%= t('booking_section.type_room') %>
+                                    </option>
+                                    <option value="suite">
+                                        <%= t('booking_section.type_suite') %>
+                                    </option>
+                                    <option value="finca-completa">
+                                        <%= t('booking_section.type_full') %>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bookNotes">
+                                <%= t('booking_section.label_notes') %>
+                            </label>
+                            <textarea id="bookNotes" name="notes"
+                                placeholder="<%= t('booking_section.placeholder_notes') %>" rows="3"
+                                style="resize: none; overflow: auto;"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn--primary">
+                            <%= t('booking_section.submit') %>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CONTACT ===== -->
+        <section class="contact" id="contacte">
+            <div class="container">
+                <div class="contact__grid">
+                    <div class="contact__info reveal">
+                        <p class="section-subtitle">
+                            <%= t('contact_section.subtitle') %>
+                        </p>
+                        <h2 class="section-title">
+                            <%= t('contact_section.title') %>
+                        </h2>
+                        <p class="section-desc">
+                            <%= t('contact_section.description') %>
+                        </p>
+
+                        <div class="contact__info-items">
+                            <div class="contact__info-item">
+                                <div class="contact__info-icon">📍</div>
+                                <div>
+                                    <p class="contact__info-label">
+                                        <%= t('contact_section.address_label') %>
+                                    </p>
+                                    <p class="contact__info-value"><%- t('contact_section.address_value') %></p>
+                                </div>
+                            </div>
+                            <div class="contact__info-item">
+                                <div class="contact__info-icon">📞</div>
+                                <div>
+                                    <p class="contact__info-label">
+                                        <%= t('contact_section.phone_label') %>
+                                    </p>
+                                    <p class="contact__info-value">
+                                        <%= t('contact_section.phone_value') %>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="contact__info-item">
+                                <div class="contact__info-icon">✉️</div>
+                                <div>
+                                    <p class="contact__info-label">
+                                        <%= t('contact_section.email_label') %>
+                                    </p>
+                                    <p class="contact__info-value">
+                                        <%= t('contact_section.email_value') %>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="contact__info-item">
+                                <div class="contact__info-icon">🕐</div>
+                                <div>
+                                    <p class="contact__info-label">
+                                        <%= t('contact_section.hours_label') %>
+                                    </p>
+                                    <p class="contact__info-value">
+                                        <%= t('contact_section.hours_value') %>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact__form reveal" id="contactForm" action="/contact" method="POST">
+                        <h3>
+                            <%= t('contact_section.form_title') %>
+                        </h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName">
+                                    <%= t('contact_section.label_name') %>
+                                </label>
+                                <input type="text" id="contactName" name="name"
+                                    placeholder="<%= t('contact_section.placeholder_name') %>" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">
+                                    <%= t('contact_section.label_email') %>
+                                </label>
+                                <input type="email" id="contactEmail" name="email"
+                                    placeholder="<%= t('contact_section.placeholder_email') %>" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactSubject">
+                                <%= t('contact_section.label_subject') %>
+                            </label>
+                            <input type="text" id="contactSubject" name="subject"
+                                placeholder="<%= t('contact_section.placeholder_subject') %>" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactMessage">
+                                <%= t('contact_section.label_message') %>
+                            </label>
+                            <textarea id="contactMessage" name="message"
+                                placeholder="<%= t('contact_section.placeholder_message') %>" rows="5"
+                                required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn--olive">
+                            <%= t('contact_section.submit') %>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>
+</body>
+
+</html>
